@@ -5,18 +5,21 @@ import ReactDOM from 'react-dom';
 
 import {
   Header,
-  UserPosts
+  UserPosts,
+  UserTodos
 } from './components';
 
 import {
   getUsers,
-  getPostsByUser
+  getPostsByUser,
+  getTodosByUser // NEW
 } from './api';
 
 const App = () => {
   const [userList, setUserList] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
+  const [userTodos, setUserTodos] = useState([]); // NEW
 
   useEffect(() => {
     getUsers()
@@ -31,12 +34,22 @@ const App = () => {
   useEffect(() => {
     if (!currentUser) {
       setUserPosts([]);
+      setUserTodos([]); // NEW
       return;
     }
 
     getPostsByUser(currentUser.id)
       .then(posts => {
         setUserPosts(posts);
+      })
+      .catch(error => {
+        // something something errors
+      });
+
+    // NEW
+    getTodosByUser(currentUser.id)
+      .then(todos => {
+        setUserTodos(todos);
       })
       .catch(error => {
         // something something errors
@@ -50,10 +63,15 @@ const App = () => {
         currentUser={ currentUser }
         setCurrentUser={ setCurrentUser } />
       {
-        currentUser
-        ? <UserPosts
-            userPosts={ userPosts }
-            currentUser={ currentUser } />
+        currentUser // MODIFIED
+        ? <>
+            <UserPosts
+              userPosts={ userPosts }
+              currentUser={ currentUser } />
+            <UserTodos
+              userTodos={ userTodos }
+              currentUser={ currentUser } />
+          </>
         : null
       }
 
