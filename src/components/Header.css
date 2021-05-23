@@ -1,6 +1,5 @@
-/* src/components/Header.css */
-
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+/* sc/components/Header.css */
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
 
 header {
   display: flex;
@@ -8,7 +7,7 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  font-family: 'Balsamic Sans', sans-serif;
+  font-family: "Balsamic Sans", sans-serif;
   font-size: 16px;
 
   background: lightseagreen;
@@ -29,7 +28,22 @@ header .user-select {
 
 header .user-select select {
   width: 16em;
-  margin-right: .5em;
+  margin-right: 0.5em;
+}
+
+header .user-select a {
+  padding: 8px 12px;
+  color: #333333;
+  font-weight: bold;
+  font-size: 1em;
+  color: #8ff;
+  background: #333333;
+  margin-right: 0.5em;
+}
+
+header .user-select a.current {
+  background: #8ff;
+  color: #333333;
 }
 
 header .user-select select,
